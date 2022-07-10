@@ -1,10 +1,10 @@
 package lk.homies.spring.controller;
 
 import lk.homies.spring.dto.CarDTO;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import lk.homies.spring.service.CarService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 /**
  * @author Helitha Sri
@@ -15,9 +15,13 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/done")
 public class SubmitController {
 
-    @PostMapping
-    public void saveForm(@ModelAttribute CarDTO carDTO){
+    @Autowired
+    CarService service;
 
+    @PostMapping
+    public void saveForm(@RequestPart("carDTO") CarDTO carDTO, @RequestPart("file") MultipartFile file){
+        System.out.println(carDTO.toString());
+        service.SaveData(carDTO, file);
     }
 
 }

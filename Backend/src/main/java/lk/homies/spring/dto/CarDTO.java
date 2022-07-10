@@ -18,7 +18,7 @@ import java.util.List;
 @Data
 @ToString
 public class CarDTO {
-    String name;
-    String brand;
-    List<ImgDTO> img;
+    private String name;
+    private String brand;
+    private List<ImgDTO> img;
 }

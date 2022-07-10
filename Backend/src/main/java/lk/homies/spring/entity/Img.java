@@ -5,10 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 
 /**
  * @author Helitha Sri
@@ -21,11 +18,14 @@ import javax.persistence.ManyToOne;
 @Data
 @ToString
 @Entity
+//@IdClass(CarImg.class)
 public class Img{
     @Id
-    String imgId;
-    String path;
+    private String imgId;
+//    private String carId;
+    private String path;
+/*
     @ManyToOne
-    @JoinColumn(name="name")
-    Car car;
+    @JoinColumn(name="car", nullable = false)
+    Car car;*/
 }

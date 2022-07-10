@@ -5,9 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 import java.util.List;
 
 /**
@@ -23,9 +21,10 @@ import java.util.List;
 @Entity
 public class Car {
     @Id
-    String name;
-    String brand;
+    private String name;
+    private String brand;
 
-    @OneToMany
-    List<Img> img;
+    @OneToMany(targetEntity = Img.class,cascade = CascadeType.ALL)
+    @JoinColumn(name = "ca_fk", referencedColumnName = "name")
+    private List<Img> img;
 }

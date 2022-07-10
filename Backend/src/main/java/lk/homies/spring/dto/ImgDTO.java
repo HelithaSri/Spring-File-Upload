@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
+import org.springframework.web.multipart.MultipartFile;
 
 /**
  * @author Helitha Sri
@@ -17,7 +18,22 @@ import lombok.ToString;
 @Data
 @ToString
 public class ImgDTO {
-    String imgId;
-    String path;
-    Car car;
+    private String imgId;
+    private String path;
+//    private CarDTO car;
+//    Car car;
+//    MultipartFile file;
+
+    /*public ImgDTO(String imgId, String path, Car car, MultipartFile file) {
+        this.imgId = imgId;
+        this.path = path;
+        this.car = car;
+        this.file = file;
+    }
+
+    public ImgDTO(String imgId, String path, Car car) {
+        this.imgId = imgId;
+        this.path = path;
+        this.car = car;
+    }*/
 }
