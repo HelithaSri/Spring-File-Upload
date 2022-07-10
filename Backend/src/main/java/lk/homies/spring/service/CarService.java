@@ -7,4 +7,7 @@ package lk.homies.spring.service;
  */
 
 public interface CarService {
+
+
+
 }
