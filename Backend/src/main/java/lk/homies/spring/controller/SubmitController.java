@@ -4,6 +4,7 @@ import lk.homies.spring.dto.CarDTO;
 import lk.homies.spring.dto.FormDataWithFileDTO;
 import lk.homies.spring.dto.ImgDTO;
 import lk.homies.spring.service.CarService;
+import lk.homies.spring.util.ResponseUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -30,16 +31,25 @@ public class SubmitController {
 //        service.SaveData(carDTO, file);
     }
 
-
+    int s = 0;
     @PostMapping("/a") //(consumes = "multipart/form-data")
-    public void saveForma(@ModelAttribute FormDataWithFileDTO formDataWithFileDTO){
+    public ResponseUtil saveForma(@ModelAttribute FormDataWithFileDTO formDataWithFileDTO){
         System.out.println(formDataWithFileDTO.toString());
-        ImgDTO imgDTO = new ImgDTO("IMG001", "");
+
+        ImgDTO imgDTO = new ImgDTO(s+"", "");
+        s = s+1;
         List<ImgDTO> dtoList = new ArrayList<>();
         dtoList.add(imgDTO);
         CarDTO carDTO = new CarDTO(formDataWithFileDTO.getName(), formDataWithFileDTO.getBrand(), dtoList);
-
+        System.out.println("id : "+s);
         service.SaveData(carDTO, formDataWithFileDTO.getFile());
+
+        return new ResponseUtil(200,"Ok",null);
+    }
+
+    @GetMapping
+    public ResponseUtil getAll(){
+        return new ResponseUtil(200,"Ok",service.getData());
     }
 
 }

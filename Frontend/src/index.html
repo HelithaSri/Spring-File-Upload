@@ -32,6 +32,7 @@
                 </div>
 
                 <button class="btn btn-primary" id="btnUpload" type="button">Submit</button>
+                <button class="btn btn-success" id="btnLoad" type="button">Load All</button>
             </form>
         </div>
         <div class="col">
@@ -68,10 +69,14 @@
 
     let baseUrl = "http://localhost:8080/Backend_war/";
 
+    $("#btnLoad").click(function () {
+        loadTheLastUploadedImage();
+    })
 
     $("#btnUpload").click(function () {
 
         aa();
+        loadTheLastUploadedImage();
     });
 
     function defu() {
@@ -161,6 +166,49 @@
             success: function (resp) {
                 alert("Successfully Uploaded");
                 // loadTheLastUploadedImage();
+            },
+            error: function (err) {
+                console.log(err);
+            }
+        });
+    }
+
+    function loadTheLastUploadedImage() {
+        $("#tblData").empty();
+        $.ajax({
+            url: baseUrl + "done",
+            method: 'get',
+            dataType: 'json',
+            success: function (resp) {
+                let url = resp[resp.length - 1];
+                console.log(url);
+                console.log(resp.data.img);
+                let data = resp.data;
+
+                $(".display").css({
+                    "background": `url(${baseUrl + url})`,
+                    "background-size": "cover",
+                    "height": "300px"
+                });
+
+                for (const fetch of resp.data) {
+                    let index=0;
+                    for (const imgList of fetch.img) {
+                        let row = `<tr>
+                                <td>${index}</td>
+                                <td>${fetch.name}</td>
+                                <td>${fetch.brand}</td>
+                                <td><img src="${baseUrl + imgList.path}" width="100%""
+                                style="background-size:cover;max-width: 200%; height: 100px;"
+                                ></td>
+                              </tr>`;
+                        $("#tblData").append(row);
+                        console.log(baseUrl + imgList.path);
+                    }
+                    index++;
+
+                }
+
             },
             error: function (err) {
                 console.log(err);

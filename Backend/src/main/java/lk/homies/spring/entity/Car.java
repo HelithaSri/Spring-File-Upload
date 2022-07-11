@@ -24,7 +24,7 @@ public class Car {
     private String name;
     private String brand;
 
-    @OneToMany(targetEntity = Img.class,cascade = CascadeType.ALL)
+    @OneToMany(targetEntity = Img.class, cascade = CascadeType.ALL)
     @JoinColumn(name = "carId", referencedColumnName = "name")
     private List<Img> img;
 }

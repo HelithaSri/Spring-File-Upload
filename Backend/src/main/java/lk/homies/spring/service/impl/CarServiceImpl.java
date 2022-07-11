@@ -45,7 +45,7 @@ public class CarServiceImpl implements CarService {
                 System.out.println("uploadDir : "+uploadDir);
                 uploadDir.mkdir();
                 file.transferTo(new File(uploadDir.getAbsolutePath()+"/"+file.getOriginalFilename()));
-                path="upload/"+file.getOriginalFilename();
+                path="uploads/"+file.getOriginalFilename();
             } catch (URISyntaxException e) {
                 e.printStackTrace();
             } catch (IOException e) {
