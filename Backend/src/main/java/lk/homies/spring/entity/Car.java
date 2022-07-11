@@ -25,6 +25,6 @@ public class Car {
     private String brand;
 
     @OneToMany(targetEntity = Img.class,cascade = CascadeType.ALL)
-    @JoinColumn(name = "ca_fk", referencedColumnName = "name")
+    @JoinColumn(name = "carId", referencedColumnName = "name")
     private List<Img> img;
 }

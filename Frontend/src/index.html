@@ -14,7 +14,8 @@
 <div class="container overflow-hidden">
     <div class="row gx-5">
         <div class="col">
-            <form id="car-form">
+<!--            enctype="multipart/form-data"-->
+            <form  id="car-form">
                 <div class="mb-3">
                     <label class="form-label" for="name">Vehicle Name</label>
                     <input class="form-control" id="name" name="name" type="text">
@@ -26,11 +27,11 @@
                 </div>
 
                 <div class="mb-3">
-                    <label class="form-label" for="formFile">Vehicle IMG</label>
-                    <input class="form-control" id="formFile" name="file" type="file">
+                    <label class="form-label" for="file">Vehicle IMG</label>
+                    <input class="form-control" id="file" name="file" type="file">
                 </div>
 
-                <button class="btn btn-primary" type="button">Submit</button>
+                <button class="btn btn-primary" id="btnUpload" type="button">Submit</button>
             </form>
         </div>
         <div class="col">
@@ -67,28 +68,105 @@
 
     let baseUrl = "http://localhost:8080/Backend_war/";
 
+
     $("#btnUpload").click(function () {
+
+        aa();
+    });
+
+    function defu() {
+        let serialize = $("#car-form").serialize();
+
+        /*let inputData = {
+            name: $("#name").val(),
+            brand: $("#brand").val(),
+            img: [
+                {
+                    imgId: "img001",
+                    path: ""
+                }
+            ]
+        };*/
+
+        // let s1 = JSON.stringify(inputData);
+
         var data = new FormData();
+
         let file = $("#file")[0].files[0];
         let fileName = $("#file")[0].files[0].name;
-        data.append("myFile", file, fileName);
 
+        console.log("file : " + file + "\n fname : " + fileName);
+
+        // data.append("carDTO", s1);
+        data.append("file", file, fileName);
+        console.table(data);
+        // data.append("carDTO",JSON.stringify(inputData));
+        // console.log(JSON.stringify(inputData));
+        console.log(baseUrl + "done");
         $.ajax({
-            url: baseUrl + "api/v1/upload",
-            method: 'post',
+            url: baseUrl + "done/a",
+            method: 'POST',
             async: true,
             contentType: false,
             processData: false,
-            data: data,
+            Backbone: false,
+            data: serialize,
             success: function (resp) {
                 alert("Successfully Uploaded");
-                loadTheLastUploadedImage();
+                // loadTheLastUploadedImage();
             },
             error: function (err) {
                 console.log(err);
             }
         });
-    });
+    }
+
+    function aa() {
+        let serialize = $("#car-form").serialize();
+
+        const f = document.getElementById('car-form');
+
+        const fData = new FormData(f);
+
+        /*let inputData = {
+            name: $("#name").val(),
+            brand: $("#brand").val(),
+            img: [
+                {
+                    imgId: "img001",
+                    path: ""
+                }
+            ]
+        };*/
+
+        // let s1 = JSON.stringify(inputData);
+
+        var data = new FormData();
+
+        let file = $("#file")[0].files[0];
+        let fileName = $("#file")[0].files[0].name;
+
+        console.log("file : " + file + "\n fname : " + fileName);
+
+        data.append("file", file, fileName);
+
+        $.ajax({
+            url: baseUrl + "done/a",
+            method: 'POST',
+            async: true,
+            contentType: false,
+            processData: false,
+            Backbone: false,
+            data: fData,
+            success: function (resp) {
+                alert("Successfully Uploaded");
+                // loadTheLastUploadedImage();
+            },
+            error: function (err) {
+                console.log(err);
+            }
+        });
+    }
 
 </script>
 </html>
